@@ -1,0 +1,8 @@
+# Lipi font builder and tools
+uharfbuzz>=0.40.0
+fonttools>=4.62.1
+freetype-py>=2.5.1
+# tools/render.py, tools/mark_audit.py
+pillow>=10.0
+# builder/test_shaping.py
+pytest>=7
