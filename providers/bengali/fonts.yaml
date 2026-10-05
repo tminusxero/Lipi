@@ -1,0 +1,24 @@
+# Recommended fonts for the Bengali provider. All from Google Fonts (OFL 1.1).
+- family: Noto Serif Bengali
+  source: https://github.com/google/fonts/tree/main/ofl/notoserifbengali
+  file: NotoSerifBengali[wdth,wght].ttf
+  version: "3.000"
+  licence: OFL-1.1
+  note: reference font; 998 table entries at 12 pt
+- family: Tiro Bangla
+  source: https://github.com/google/fonts/tree/main/ofl/tirobangla
+  file: TiroBangla-Regular.ttf
+  licence: OFL-1.1
+  note: word-final forms before a danda, final ya-phala before a modifier; 1032 entries
+- family: Hind Siliguri
+  source: https://github.com/google/fonts/tree/main/ofl/hindsiliguri
+  file: HindSiliguri-Regular.ttf
+  version: "1.001"
+  licence: OFL-1.1
+  note: sans; joins conjuncts with half forms (table flagged 06 01); 1006 entries
+- family: Noto Sans Bengali
+  source: https://github.com/google/fonts/tree/main/ofl/notosansbengali
+  file: NotoSansBengali[wdth,wght].ttf
+  version: "3.011"
+  licence: OFL-1.1
+  note: sans; ে/ৈ per-base forms (.long, .long.init), 26 joint sign classes; 1713 rows, 13.7 KB at 12 pt
