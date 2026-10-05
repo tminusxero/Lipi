@@ -425,8 +425,9 @@ class IndicClusterPlan:
                 full_ends_cluster = full is not None and pos + full_len == n
                 if (full is not None and not full_ends_cluster and full_len >= 3
                         and seq[pos] in spec.consonant_set and seq[pos + full_len] == spec.virama):
-                    # Lipi: a continuing ligature needs its alias key,
-                    # and yields before a subjoining consonant (rakar).
+                    # Lipi: a ligature continues only when the builder recorded
+                    # its pair + virama key (the entry's continues flag), and
+                    # yields before a subjoining consonant (rakar).
                     after = seq[pos + full_len + 1] if pos + full_len + 1 < n else None
                     sub_mark = after is not None and self._kind_of((spec.virama, after)) in MARK_KINDS
                     tail_lig = after is not None and self._kind_of((seq[pos + full_len - 1], spec.virama, after)) == KIND_BASE
@@ -705,9 +706,10 @@ class IndicClusterPlan:
                 self._add(seq, run, KIND_BASE)
                 pairs.append(seq)
         # Ligatures that still form when the cluster continues (ष्ट्वा keeps
-        # ष्ट; द्व्य does not keep द्व): recorded as the pair key plus a
-        # virama, mapping to the same glyph. Fonts decide this per pair by
-        # the order of their lookups.
+        # ष्ट; द्व्य does not keep द्व): recorded here as the pair key plus a
+        # virama so the device simulation sees the continuation, and written
+        # to the table as the pair entry's `continues` flag (build()). Fonts
+        # decide this per pair by the order of their lookups.
         aliases = 0
         if spec.join_style == "half":
             for pair in pairs:

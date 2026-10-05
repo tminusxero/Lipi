@@ -41,7 +41,7 @@ KEY_CLASS_INDEX = 0x10  # | n
 # Table kinds, one per script, declared by each ScriptSpec (Lipi::SHAPE_KIND_*).
 # Kind 1 keeps the original 5-byte keys; every later kind up to
 # SHAPE_KIND_LAST shares the 7-byte geometry. The reserved numbers are listed
-# in docs/file-formats.md.
+# in docs/table-format.md.
 SHAPE_KIND_LAST = 10
 # Largest table the device loads (Lipi::MAX_SHAPE_TABLE_BYTES).
 MAX_TABLE_BYTES = 16384
@@ -82,8 +82,9 @@ def max_key_len_for_kind(kind):
 
 
 def entry_size_for_kind(kind):
-    """Cluster table entry size for a shape kind (0 = no table): key,
-    length byte and u16 output codepoint."""
+    """Unpacked cluster table row size for a shape kind (0 = no table): key
+    at its longest, meta byte and u16 value (the packed table stores each key
+    at its own length; this is the size the budget and the tests reason in)."""
     key_len = max_key_len_for_kind(kind)
     return key_len + 3 if key_len else 0
 
@@ -155,7 +156,7 @@ class ScriptSpec:
     def in_block(self, cp):
         return self.block_base <= cp < self.block_base + 0x80
 
-    # Mirrors of Lipi::isMark / attachesBelow / anchorClass (Registry.h) for
+    # Mirrors of Lipi::isMark / attachesBelow / anchorClass (LipiMarks.h) for
     # the script's block and the PUA mark classes.
     def is_mark(self, cp):
         return cp in self.marks or PUA_BELOW[0] <= cp <= PUA_BELOW_RIGHT[1]

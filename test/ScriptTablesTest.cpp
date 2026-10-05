@@ -229,7 +229,7 @@ TEST(ScriptTables, PackedDirectorySizesTheTable) {
 }
 
 TEST(ScriptTables, TableKindGeometry) {
-  // Kind 1 is frozen: existing Bengali fonts must keep loading.
+  // Kind 1 keeps its 5-byte keys: existing Bengali fonts must keep loading.
   EXPECT_EQ(Lipi::entrySizeForKind(Lipi::SHAPE_KIND_BENGALI), 8u);
   EXPECT_EQ(Lipi::maxKeyLenForKind(Lipi::SHAPE_KIND_BENGALI), 5u);
   // Every later script shares the wider geometry.
@@ -242,11 +242,12 @@ TEST(ScriptTables, TableKindGeometry) {
   EXPECT_EQ(Lipi::maxKeyLenForKind(0), 0u);
   EXPECT_EQ(Lipi::entrySizeForKind(11), 0u);
   EXPECT_EQ(Lipi::entrySizeForKind(255), 0u);
-  // The budget holds the largest table built so far (Tiro Bangla, 1064
-  // kind-1 entries) with room for the wider kinds.
+  // The budget holds the largest tables built so far (Tiro Devanagari
+  // Sanskrit, 14.7 KB packed; the first Bengali tables were 1064 unpacked
+  // 8-byte rows) with room for the wider kinds.
   EXPECT_GE(Lipi::MAX_SHAPE_TABLE_BYTES, 1064u * 8u);
   EXPECT_LE(Lipi::MAX_SHAPE_TABLE_BYTES, 16384u);
-  // key + length byte + u16 output fit the entry for every readable kind.
+  // key + meta byte + u16 value fit the unpacked row for every readable kind.
   for (uint32_t kind = 0; kind < 256; ++kind) {
     const uint32_t size = Lipi::entrySizeForKind(static_cast<uint8_t>(kind));
     const uint32_t keyLen = Lipi::maxKeyLenForKind(static_cast<uint8_t>(kind));
@@ -292,7 +293,7 @@ TEST(ScriptTables, Kind1KeysAreCodepointMinus0x0900) {
 }
 
 TEST(ScriptTables, Kind2TablesHoldSevenByteKeys) {
-  // A 10-byte-entry table of another kind is read with 7-byte keys by a
+  // A table of another kind (7-byte keys) is read by a
   // script of that kind (here Bengali letters under kind 2, standing in for
   // the scripts that use it), and stays invisible to kind-1 Bengali.
   Lipi::ScriptDesc kind2 = kBengali;
@@ -372,7 +373,7 @@ TEST(ScriptTables, PuaRangesAnchorAsTheBuilderExpects) {
   for (uint32_t cp = Lipi::PUA_PRE_FIRST; cp <= Lipi::PUA_PRECONS_LAST; ++cp) {
     EXPECT_FALSE(Lipi::isMark(cp)) << std::hex << cp;
   }
-  // The classes tile F000..F6FF without gaps or overlap.
+  // The classes tile F000..F8FF without gaps or overlap.
   EXPECT_EQ(Lipi::PUA_ABOVE_FIRST, Lipi::PUA_BELOW_LAST + 1);
   EXPECT_EQ(Lipi::PUA_ABOVE_CENTER_FIRST, Lipi::PUA_ABOVE_LAST + 1);
   EXPECT_EQ(Lipi::PUA_BELOW_RIGHT_FIRST, Lipi::PUA_ABOVE_CENTER_LAST + 1);

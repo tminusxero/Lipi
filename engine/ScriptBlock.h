@@ -2,9 +2,9 @@
 
 #include <cstdint>
 
-// Unicode script blocks the built-in UI fonts cannot draw. Strings that
-// contain one are routed to an SD-card font that covers it (see
-// GfxRenderer::resolveTextFontId and SdCardFontSystem). The Indic entries are
+// Unicode script blocks a reader's built-in UI fonts typically cannot draw.
+// A host routes strings that contain one to an SD-card font that covers it
+// (CrossIndix: GfxRenderer::resolveTextFontId, SdCardFontSystem). The Indic entries are
 // the ten consecutive 128-codepoint blocks starting at U+0900; the CJK entries
 // group the Han, kana and Hangul ranges the way a CJK font file covers them.
 enum class ScriptBlock : uint8_t {

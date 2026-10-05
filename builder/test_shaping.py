@@ -317,7 +317,7 @@ def test_script_selection_from_intervals():
 
 
 def test_table_kind_geometry_matches_the_device():
-    # Script.h: kind 1 frozen at key[5] + len + u16, kinds 2..10 key[7].
+    # Script.h: kind 1 at key[5] + meta + u16 (unpacked row), kinds 2..10 key[7].
     assert indic_shaping.SCRIPTS["bengali"].shape_kind == 1
     assert indic_shaping.SCRIPTS["devanagari"].shape_kind == 2
     assert indic_shaping.SHAPE_KIND_LAST == 10

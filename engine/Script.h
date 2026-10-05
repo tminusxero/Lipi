@@ -96,7 +96,7 @@ struct ScriptDesc {
   BlockMask below;              ///< vowel signs drawn under the base
   BlockMask above;              ///< vowel signs drawn over the base (े ै)
   BlockMask modifiers;          ///< candrabindu, anusvara, visarga and the like
-  BlockMask nonSpacing;         ///< everything drawn as a zero-advance overlay (see isMark in Registry.h)
+  BlockMask nonSpacing;         ///< everything drawn as a zero-advance overlay (see isMark in LipiMarks.h)
   BlockMask raFolds;            ///< letters keyed and treated as RA inside a conjunct (ৰ)
   BlockMask initSigns;          ///< pre-base signs with a word-initial form (ে ৈ)
   BlockMask preSignsWithForms;  ///< pre-base signs with per-base forms / sign classes (ি; Noto Sans Bengali: ে ৈ too);
@@ -104,7 +104,7 @@ struct ScriptDesc {
   BlockMask candrabinduBeforePost;  ///< post-base signs the candrabindu is drawn before (া ী)
 
   // Mark placement for the renderer (see attachesBelow / anchorClass in
-  // Registry.h): marks that hang from the base's below anchor rather than its
+  // LipiMarks.h): marks that hang from the base's below anchor rather than its
   // above anchor, and the anchor class of each mark. A mark in none of the
   // anchor sets takes the renderer's default placement.
   BlockMask attachBelow;
@@ -155,7 +155,7 @@ struct ScriptDesc {
 /// shares the wider one (see entrySizeForKind).
 constexpr uint8_t SHAPE_KIND_BENGALI = 1;
 constexpr uint8_t SHAPE_KIND_DEVANAGARI = 2;
-constexpr uint8_t SHAPE_KIND_LAST = 10;  ///< kinds 3..10 are reserved for the scripts listed in docs/file-formats.md
+constexpr uint8_t SHAPE_KIND_LAST = 10;  ///< kinds 3..10 are reserved for the scripts listed in docs/table-format.md
 
 /// PUA allocation shared with builder/shaping.py (writer) and Registry.h (mark
 /// classification). The range a codepoint falls in tells the renderer how to
@@ -262,8 +262,9 @@ static_assert(maxKeyLenForKind(SHAPE_KIND_LAST) <= PACKED_MAX_KEY_LEN, "the dire
 /// Longest key any kind allows; sizes the probe buffers.
 constexpr uint32_t MAX_KEY_CAP = 7;
 static_assert(maxKeyLenForKind(SHAPE_KIND_LAST) <= MAX_KEY_CAP, "probe buffers are sized by MAX_KEY_CAP");
-/// Largest cluster table a font may carry. The table stays resident per
-/// loaded style (Tiro Bangla is 8.5 KB), so the loader ignores anything
+/// Largest cluster table a font may carry. The table stays resident while
+/// the font is loaded (Tiro Devanagari Sanskrit's is 14.7 KB; a host may
+/// share one copy between a family's sizes), so the loader ignores anything
 /// bigger instead of letting a hostile header claim 80 KB on the C3.
 constexpr uint32_t MAX_SHAPE_TABLE_BYTES = 16384;
 
