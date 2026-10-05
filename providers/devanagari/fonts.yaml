@@ -1,0 +1,12 @@
+# Recommended fonts for the Devanagari provider. All from Google Fonts (OFL 1.1).
+- family: Noto Serif Devanagari
+  source: https://github.com/google/fonts/tree/main/ofl/notoserifdevanagari
+  file: NotoSerifDevanagari[wdth,wght].ttf
+  version: "2.006"
+  licence: OFL-1.1
+  note: reference font, covers Latin too; 1030 table entries at 12 pt
+- family: Tiro Devanagari Sanskrit
+  source: https://github.com/google/fonts/tree/main/ofl/tirodevanagarisanskrit
+  file: TiroDevanagariSanskrit-Regular.ttf
+  licence: OFL-1.1
+  note: best Sanskrit parity; 1470 entries, 14.7 KB table
