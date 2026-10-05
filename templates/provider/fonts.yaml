@@ -1,0 +1,7 @@
+# Recommended fonts for the __script__ provider. Google Fonts only (OFL 1.1).
+- family: Noto Serif __Script__
+  source: https://github.com/google/fonts/tree/main/ofl/notoserif__script__
+  file: NotoSerif__Script__[wdth,wght].ttf
+  version: ""
+  licence: OFL-1.1
+  note: reference font
