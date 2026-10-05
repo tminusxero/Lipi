@@ -1,0 +1,7 @@
+build/
+__pycache__/
+*.pyc
+tools/shape_cli
+tools/shape_cli_*
+.pytest_cache/
+build-asan/

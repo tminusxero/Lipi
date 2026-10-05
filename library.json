@@ -1,0 +1,15 @@
+{
+  "name": "lipi-shaper",
+  "version": "0.1.0",
+  "description": "Lipi: complex-script text shaping for readers without an OpenType engine. Fonts are pre-shaped into cluster tables at build time; the engine reorders syllables and looks clusters up on the device.",
+  "keywords": "shaping, indic, bengali, devanagari, epaper, fonts",
+  "license": "MIT",
+  "homepage": "https://github.com/skmandal/lipi",
+  "repository": {"type": "git", "url": "https://github.com/skmandal/lipi.git"},
+  "platforms": "*",
+  "frameworks": "*",
+  "build": {
+    "srcDir": "engine",
+    "includeDir": "engine"
+  }
+}
