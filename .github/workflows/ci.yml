@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  engine-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build and test
+        run: |
+          cmake -S test -B build
+          cmake --build build -j4
+          ctest --test-dir build --output-on-failure
+      - name: Build and test with AddressSanitizer and UBSan
+        run: |
+          cmake -S test -B build-asan -DLIPI_SANITIZE=ON
+          cmake --build build-asan -j4
+          ctest --test-dir build-asan --output-on-failure
+
+  builder-tests:
+    # Golden cluster tables for the recommended Google Fonts families, pinned to one
+    # google/fonts commit. The pins match the font versions in providers/*/fonts.yaml.
+    runs-on: ubuntu-latest
+    env:
+      GF_COMMIT: 7085eb89a950e85db5b166b7a58d414544b4140c
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - name: "Install builder requirements (pinned: the goldens depend on the HarfBuzz and FreeType builds)"
+        run: pip install uharfbuzz==0.56.1 fonttools==4.25.0 freetype-py==2.5.1 pillow==10.0.1 pytest==7.4.0
+      - name: Fetch fonts
+        run: |
+          mkdir -p fonts
+          for p in 'ofl/notoserifbengali/NotoSerifBengali%5Bwdth%2Cwght%5D.ttf' \
+                   'ofl/tirobangla/TiroBangla-Regular.ttf' \
+                   'ofl/hindsiliguri/HindSiliguri-Regular.ttf' \
+                   'ofl/notosansbengali/NotoSansBengali%5Bwdth%2Cwght%5D.ttf' \
+                   'ofl/notoserifdevanagari/NotoSerifDevanagari%5Bwdth%2Cwght%5D.ttf'; do
+            name=$(basename "$p" | sed 's/%5B/[/; s/%2C/,/; s/%5D/]/')
+            curl -sfL --retry 3 -o "fonts/$name" "https://raw.githubusercontent.com/google/fonts/$GF_COMMIT/$p"
+          done
+          ls -l fonts
+      - name: Builder tests
+        run: LIPI_FONT_DIR="$PWD/fonts" python3 -m pytest -q builder/test_shaping.py -rs
