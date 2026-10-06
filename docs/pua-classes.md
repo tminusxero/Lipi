@@ -3,7 +3,7 @@
 The builder allocates every shaped glyph a codepoint in the Private Use
 Area, in a range that tells the renderer how to draw it. The engine exposes
 the ranges as constants in `engine/Script.h` and answers the placement
-questions through `Registry.h` (`isMark`, `attachesBelow`, `anchorClass`).
+questions through `LipiMarks.h` (`isMark`, `attachesBelow`, `anchorClass`, defined in `Lipi.cpp`).
 
 | Range | Class | Advance | Placement |
 |-------|-------|---------|-----------|

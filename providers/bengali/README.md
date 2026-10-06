@@ -40,9 +40,9 @@ of which 101 continue, 80 triples), the half-form flag set.
 
 | Word list | Words | Noto Serif Bengali | Tiro Bangla | Hind Siliguri | Noto Sans Bengali |
 |---|---|---|---|---|---|
-| Feluda samagra | 33,770 | 99.8% | 98.9% | 99.4% | 99.3% |
-| Musafir | 12,148 | 100.0% | 99.0% | 99.6% | 99.4% |
-| Panchatantra | 11,697 | 99.9% | 98.9% | 99.6% | 99.5% |
+| detective-story collection, 1960s-90s (in copyright, not included) | 33,770 | 99.8% | 98.9% | 99.4% | 99.3% |
+| travel memoir, 1940s (in copyright, not included) | 12,148 | 100.0% | 99.0% | 99.6% | 99.4% |
+| Panchatantra, Bengali retelling | 11,697 | 99.9% | 98.9% | 99.6% | 99.5% |
 | The same lists with a trailing danda | | unchanged | unchanged | unchanged | unchanged |
 
 (Tiro Bangla 98.8 / 99.0 / 98.8 before the ে/ৈ composites of 2026-09-19.)
@@ -53,14 +53,14 @@ Tiro's headline-connector glyphs, Hind's taller ৗ after some bases, broken
 source sequences in the books.
 
 Noto Sans Bengali (Google Fonts 3.011, sans), measured 2026-09-19 with the
-ে/ৈ classes, 12 pt: Feluda 99.3%, Musafir 99.4%, Panchatantra 99.5% (91.6 /
+ে/ৈ classes, 12 pt: collection 99.3%, memoir 99.4%, Panchatantra 99.5% (91.6 /
 91.9 / 93.0 before them); 1,713 rows, 13,704 bytes, 26 joint classes of
 which 15 fit the class field (the rest keep per-base forms). Its below
 signs sat 6 to 7 px off until the anchor pass chose its probe by outcome
 (the ba-phala mark, present on a homogeneous few conjuncts, had beaten ু);
 at 16 pt they are now within 0.7 px, the nukta 2.1 px mean. The ে/ৈ
 enumeration also gives Tiro Bangla 42 headline-connector composites of ্র
-conjuncts with ে/ৈ (Feluda 98.8 to 98.9%).
+conjuncts with ে/ৈ (the collection, 98.8 to 98.9%).
 
 Mark audit at 16 pt after the outcome-based probe (2026-09-19): Noto Serif
 Bengali and Tiro Bangla take the reph as the above probe (reph 0.34 / 0.32
@@ -93,7 +93,7 @@ as base + mark, including sequences no book contains (a candrabindu after a
 dead consonant, a nukta after a conjunct), and those dominate the means
 (Hind hasanta 2.46 px, Noto Serif ba-phala 2.90 px over all pairs). The
 figure that matters for readers is the in-text one (`--words`, pairs that
-occur in the Feluda + Musafir + Panchatantra lists, weighted by word count,
+occur in the three lists, weighted by word count,
 a hasanta counted only where it is drawn): every mark of every family within
 0.6 px mean, except Hind ূ / ৃ on one conjunct composite (4.5 px, 7 words)
 and Hind's hasanta after two conjuncts (4.3 to 4.6 px, 4 words). Reph 0.26
@@ -102,5 +102,12 @@ Whole-word placement (tools/word_parity.py, 16 pt, 1.5 px tolerance) over
 the three lists: Noto Serif 106 words, Noto Sans 147, Tiro 82, Hind 746 (its
 candrabindu height, a vertical offset the format does not carry yet).
 
-`words.txt` is every sixth line of the Musafir list (2,025 words), a CI
-sample; the full lists live with the reference host.
+`words.txt` (2,109 distinct words) is a sample from মানিক বন্দ্যোপাধ্যায়'s পদ্মানদীর
+মাঝি (1936; the author died in 1956, so the text is in the public domain) as
+transcribed on Bengali Wikisource. It feeds the builder's pair weights and the
+CI parity smoke. Chosen by measurement on 2026-10-06: with it, whole-word
+placement (tools/word_parity.py, 16 pt) equals or betters the previous sample on
+every list (Tiro Bangla 59 -> 53 words over 1.5 px on the largest list); a
+19th-century sample tried first made placement clearly worse, so the sample must
+match modern spelling and vocabulary. The full novel-based lists behind the
+parity figures above are not published.

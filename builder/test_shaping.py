@@ -168,9 +168,12 @@ def test_placement_modes_follow_the_font():
     back to the pen once the survey stopped measuring dotted-circle runs, 2026-09-24,
     and to the class anchor with the Bengali pass forms, 2026-09-25: the two land on
     the same pixels in all 7,259 Hind words with ়; the class anchor is the outcome
-    this test pins so a change shows up here first.)"""
+    this test pins so a change shows up here first. With the public-domain word
+    sample of 2026-10-07 the hasanta went back to the pen while the nukta kept the
+    class anchor; whole-word placement on the three Hind lists was equal or better,
+    so the pen is the pinned outcome for the hasanta now.)"""
     cases = (
-        ("HindSiliguri", "bengali", {0x09BC: indic_shaping.MODE_CLASS, 0x09CD: indic_shaping.MODE_CLASS}),
+        ("HindSiliguri", "bengali", {0x09BC: indic_shaping.MODE_CLASS, 0x09CD: indic_shaping.MODE_PEN}),
         ("NotoSansBengali", "bengali", {0xF103: indic_shaping.MODE_OTHER, 0xF104: indic_shaping.MODE_OTHER}),
     )
     for family, script, expected in cases:

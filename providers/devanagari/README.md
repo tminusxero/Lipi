@@ -34,14 +34,14 @@ table of the current providers.
 |---|---|---|---|
 | Nirmala (Premchand, Hindi) | 6,606 | 100.0% (99.2) | 99.9% (99.9) |
 | Bhagavad Gita verses | 4,412 | 99.7% (93.9) | 99.8% (99.8) |
-| Skanda Purana (Gita Press, OCR) | 64,941 | 98.3% (95.9) | 98.1% (98.0) |
+| a Purana edition (OCR text) | 64,941 | 98.3% (95.9) | 98.1% (98.0) |
 | Gita with commentaries | 188,305 | 99.7% (93.8) | 99.5% (99.4) |
-| Srimad Bhagavat | 75,778 | 98.6% (94.6) | 98.5% (98.0) |
+| a second Purana edition (OCR text) | 75,778 | 98.6% (94.6) | 98.5% (98.0) |
 
 Measured with the identity-checked tools (tools/fontcheck.py; device runs
 from the builder's forms). Against the 2026-09-25 run they moved by a few
 words: Noto Serif's generic र्िं composite draws the .04 width where
-HarfBuzz picks .05 on some bases (21 words in Skanda, 1 px of hook), which
+HarfBuzz picks .05 on some bases (21 words in the Purana list, 1 px of hook), which
 the earlier expansion hid; Tiro loses 28 words the earlier expansion had
 flagged from a wrong glyph name. Mark audit at 16 pt, in-text pairs (the
 four lists, weighted by word count): every sign and the reph within 0.6 px
@@ -53,7 +53,7 @@ composites (19.6 px, 22 words), and the Vedic accents.
 
 Residual groups: Noto's two-glyph ि rule before half-form sequences (the
 main Sanskrit gap, a width-class refinement not yet in the table format),
-OCR damage in the Skanda list (bare anusvara tokens, double viramas), reph
+OCR damage in the Purana list (bare anusvara tokens, double viramas), reph
 plus anusvara on one base. Precomposed ई and ऐ are counted as the sequence
 the Google Fonts Noto draws for them.
 
@@ -64,5 +64,6 @@ extra per-base point and its mean error drops from 2.13 px on 982 bases
 (691 over a pixel) to 0.30 px (none). Noto Serif Devanagari was already
 within 0.5 px except the Vedic marks, now 0.3 to 0.4 px.
 
-`words.txt` is every third line of the Nirmala list (2,202 words), a CI
-sample; the full lists live with the reference host.
+`words.txt` is every third line of the Nirmala list (2,202 words; Premchand,
+1927, public domain); it feeds the builder's pair weights and the CI parity
+smoke. The full lists live with the reference host and are not published.

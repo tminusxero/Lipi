@@ -25,8 +25,8 @@ builder/      Python: shaping.py (HarfBuzz enumeration, table packing,
 tools/        fontcheck.py (a .cpfont's table is the builder's own for its TTF),
               hb_parity.py (device output vs HarfBuzz), mark_audit.py,
               render.py (host renderer emulation), shape_cli.cpp
-docs/         table-format.md, pua-classes.md, renderer-contract.md,
-              provider-guide.md
+docs/         interfaces.md (host, provider and builder contracts), table-format.md,
+              pua-classes.md, renderer-contract.md, provider-guide.md
 templates/    a provider skeleton; tools/new_provider.py copies it
 test/         CMake project for the engine and every provider's tests
 ```
@@ -36,7 +36,7 @@ test/         CMake project for the engine and every provider's tests
 | Provider | Languages | Table kind | Reference fonts | Parity (identical glyph sequences vs HarfBuzz) |
 |---|---|---|---|---|
 | bengali | Bangla, Assamese | 1 | Noto Serif Bengali, Tiro Bangla, Hind Siliguri, Noto Sans Bengali | 99.8 to 100.0% (Noto Serif), 98.9 to 99.0% (Tiro), 99.4 to 99.6% (Hind), 99.3 to 99.5% (Noto Sans) on three novels |
-| devanagari | Hindi, Marathi, Nepali, Sanskrit | 2 | Noto Serif Devanagari, Tiro Devanagari Sanskrit | Hindi prose 99.2% / 99.9%; Sanskrit 93.8 to 95.9% / 98.0 to 99.8% |
+| devanagari | Hindi, Marathi, Nepali, Sanskrit | 2 | Noto Serif Devanagari, Tiro Devanagari Sanskrit | Hindi prose 100.0% / 99.9%; Sanskrit 98.3 to 99.7% / 98.1 to 99.8% (2026-09-26) |
 
 Numbers from `providers/*/README.md`, measured with `tools/hb_parity.py` at
 12 pt on real-book word lists.

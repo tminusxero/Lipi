@@ -2242,7 +2242,7 @@ class MarkSurvey:
 
 
 def compute_anchors(plan, cp_to_form, unit_scale, log=None, survey=None):
-    """{cp: (above, below)} anchor bytes for the script's glyphs. `survey` is
+    """{cp: (above, below, extra)} anchor bytes for the script's glyphs. `survey` is
     a MarkSurvey of the same plan and cp_to_form when the caller has one.
 
     A base (any spacing glyph: letters, signs, PUA composites) stores where

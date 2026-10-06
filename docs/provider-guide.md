@@ -20,7 +20,9 @@ base and table kind filled in (the kind is the script's reserved number in
 
 One `constexpr ScriptDesc makeTamil()`. Everything is data:
 
-- identity: `shapeKind`, `block` (`ScriptBlock` enum value), `blockBase`
+- identity: `shapeKind`, `block` (`ScriptBlock` enum value), `blockBase`. A script
+  outside `U+0900..U+0DFF` also needs engine work first (`ScriptBlock.h`, the
+  key-byte scheme, `mayNeedShaping`'s lead-byte mask): see `docs/interfaces.md` 3.5.
 - rules: `rephMode` (None / PreBase; PostBase is reserved and not implemented), `joinStyle` (Subjoined /
   HalfForm; a font may still join with half forms, the table flag `06 01`
   says so), `rephAfterPost`
@@ -64,9 +66,13 @@ table entry) and one line in `builder/registry.py`. The macro
 ## 5. Get a font and a word list
 
 `fonts.yaml` names the recommended family (Google Fonts, with its licence).
-Put a word list from a real book in `words.txt` (a few thousand words is
-enough for CI; keep the full list outside the repo). The extraction recipe
-used for the existing providers is in their READMEs.
+Put a word list in `words.txt`: a few thousand distinct words of modern prose
+in the script, taken from a public-domain text (Wikisource is a good source;
+do not commit words drawn from a book still in copyright). The builder weights
+its mark-anchor choices by the (base, mark) pairs in this list, so the sample
+must resemble what readers will read: an old-orthography sample measurably
+worsened Bengali placement. Keep any larger, non-publishable lists outside the
+repo. How the existing providers made theirs is in their READMEs.
 
 ## 6. Build and measure
 

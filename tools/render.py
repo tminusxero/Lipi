@@ -24,7 +24,7 @@ def load_cpfont(path):
             if a <= cp <= b:
                 idx = o + cp - a
                 w, h, adv, left, top, dlen, aa, ab, doff = struct.unpack_from("<BBHhhHBBI", data, glyphsOff + 16 * idx)
-                extra, doff = doff >> 24, doff & 0xFFFFFF  # v6: the top byte is a base's third anchor
+                extra, doff = doff >> 24, doff & 0xFFFFFF  # the top byte of the data offset is a base's third anchor
                 return dict(w=w, h=h, adv=adv, left=left, top=top, above=aa, below=ab, extra=extra,
                             bits=data[bmpOff + doff: bmpOff + doff + dlen])
         return None
@@ -66,7 +66,7 @@ def anchored_offset(base_byte, mark_byte):
     return (half + 1) // 2 if half >= 0 else -((-half + 1) // 2)
 
 def mark_offset(below, bg, mg, adv_px):
-    # Mirrors glyphAnchor::markOffsetWithMode (v6 placement modes) through the builder's helper.
+    # Mirrors glyphAnchor::markOffsetWithMode (placement modes) through the builder's helper.
     return indic_shaping.mark_offset_px(below, (bg.get("above", 0), bg.get("below", 0), bg.get("extra", 0)), adv_px,
                                         (mg.get("above", 0), mg.get("below", 0)))
 

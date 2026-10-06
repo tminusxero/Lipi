@@ -49,7 +49,7 @@ the extra point. The builder picks the mode per mark and font by residual
 (`compute_anchors`, `mark_offset_px` is the host's reference rule; CrossInk:
 `glyphAnchor::markOffsetWithMode` in `lib/EpdFont/EpdFontData.h`, the draw
 loops in `GfxRenderer.cpp`; a font stores the bytes in its own container,
-CrossInk's `.cpfont` v6 in the glyph record).
+CrossIndix's `.cpfont` glyph record).
 
 ## 5. Warm the advance table once per paragraph
 
@@ -60,7 +60,7 @@ with warm advances. CrossInk: `appendShapedIndicText` in `GfxRenderer.cpp`.
 
 ## 6. Route UI text by block
 
-`Lipi::scriptBlockOf(cp)` (`engine/ScriptBlock.h`) names the block of a
+`scriptBlockOf(cp)` (`engine/ScriptBlock.h`, a free function outside the namespace) names the block of a
 codepoint so a host can pick a fallback font family for UI strings; the
 probe letter per block (`scriptProbe`) tests whether a font file covers it.
 
